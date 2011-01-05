@@ -1,0 +1,41 @@
+CHANGELOG.txt for xmlapi.php
+
+ 1.0.7:
+ - Corrected typo for setrellerlimits where xml_query incorrectly called xml-api's setresellerips
+
+ 1.0.6:
+ - Changed 'user' URL parameter for API1/2 calls to 'cpanel_xmlapi_user'/'cpanel_jsonapi_user' to
+   resolve conflicts with API2 functions that use 'user' as a parameter
+ - Relocated exmaple script to Example subdirectory
+ - Modified example scripts to take remote server IP and root password from environment variables
+   REMOTE_HOST and REMOTE_PASSWORD, respectively
+ - Created subdirectory Tests for PHPUnit tests
+ - Add PHPUnit test BasicParseTest.php
+
+ 1.0.5:
+ - fix bug where api1_query and api2_query would not return JSON data
+
+ 1.0.4:
+ - set_port will now convert non-int values to ints
+
+ 1.0.3:
+ - Fixed issue with set_auth_type using incorrect logic for determining acceptable auth types
+ - Suppress non-UTF8 encoding when using curl
+
+ 1.0.2:
+ - Increased curl buffer size to 128kb from 16kb
+ - Fix double encoding issue in terminateresellers()
+
+ 1.0.1:
+ - Fixed use of wrong variable name in curl error checking
+ - adjust park() to use api2 rather than API1
+
+ 1.0
+ - Added in 11.25 functions
+ - Changed the constructor to allow for either the "DEFINE" config setting method or using parameters
+ - Removed used of the gui setting
+ - Added fopen support
+ - Added auto detection for fopen or curl (uses curl by default)
+ - Added ability to return in multiple formats: associative array, simplexml, xml, json
+ - Added PHP Documentor documentation for all necessary functions
+ - Changed submission from GET to POST
