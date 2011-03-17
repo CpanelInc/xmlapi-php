@@ -34,6 +34,9 @@
 *
 * Changes
 *
+* 1.0.8:
+* correct unpark bug as reported by Randall Kent
+*
 * 1.0.7:
 * Corrected typo for setrellerlimits where xml_query incorrectly called xml-api's setresellerips 
 *
@@ -2117,7 +2120,7 @@ class xmlapi {
 			return false;
 		}
 		$args['domain'] = $domain;
-		return $this->api1_query($username, 'Park', 'unpark', $args);
+		return $this->api2_query($username, 'Park', 'unpark', $args);
 	}
 
 	####
