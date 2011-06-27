@@ -36,7 +36,7 @@
 *
 * 1.0.9:
 * added input argument to servicestatus method which allows single service
-*  filtering
+*  filtering (Case 50804)
 * 
 * 1.0.8:
 * correct unpark bug as reported by Randall Kent

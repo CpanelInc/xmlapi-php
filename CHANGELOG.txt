@@ -1,5 +1,11 @@
 CHANGELOG.txt for xmlapi.php
 
+ 1.0.9:
+ - Add input argument to method signature for servicestatus()
+
+ 1.0.8:
+ - Correct unpark bug as reported by Randall Kent
+
  1.0.7:
  - Corrected typo for setrellerlimits where xml_query incorrectly called xml-api's setresellerips
 
