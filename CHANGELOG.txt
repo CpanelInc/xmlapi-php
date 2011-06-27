@@ -1,5 +1,9 @@
 CHANGELOG.txt for xmlapi.php
 
+ 1.0.10:
+ - github#1 - [Bugfix]: setresellerpackagelimits() does not properly prepare 
+    input arguments for query (Case 51076)
+
  1.0.9:
  - Add input argument to method signature for servicestatus()
 

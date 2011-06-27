@@ -29,10 +29,14 @@
 * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 * POSSIBILITY OF SUCH DAMAGE.
 *
-* Version: 1.0.9
+* Version: 1.0.10
 * Last updated: 27 June 2011
 *
 * Changes
+* 
+* 1.0.10:
+* github#1 - [Bugfix]: setresellerpackagelimits() does not properly prepare 
+*  input arguments for query (Case 51076)
 *
 * 1.0.9:
 * added input argument to servicestatus method which allows single service
@@ -82,7 +86,7 @@
 *
 * @copyright 2011 cPanel, Inc
 * @license http://sdk.cpanel.net/license/bsd.html
-* @version 1.0.9
+* @version 1.0.10
 * @link http://twiki.cpanel.net/twiki/bin/view/AllDocumentation/AutomationIntegration/XmlApi
 * @since File available since release 0.1
 **/
@@ -110,7 +114,7 @@
 * @package xmlapi
 * @copyright 2011 cPanel, Inc.
 * @license http://sdk.cpanel.net/license/bsd.html
-* @version Release: 1.0.9
+* @version Release: 1.0.10
 * @link http://twiki.cpanel.net/twiki/bin/view/AllDocumentation/AutomationIntegration/XmlApi
 * @since Class available since release 0.1
 **/
@@ -1664,7 +1668,8 @@ class xmlapi {
 			}
 			$params = array(
 				'user' => $user,
-				'no_limit' => '0'
+				'no_limit' => '0',
+			    'package' => $package,
 			);
 			if ($allowed) {
 				$params['allowed'] = 1;
