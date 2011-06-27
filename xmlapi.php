@@ -7,7 +7,7 @@
 *  
 * LICENSE:
 *
-* Copyright (c) 2009, cPanel, Inc.
+* Copyright (c) 2011, cPanel, Inc.
 * All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without modification, are permitted provided
@@ -29,11 +29,15 @@
 * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 * POSSIBILITY OF SUCH DAMAGE.
 *
-* Version: 1.0.7
-* Last updated: 10 November 2010
+* Version: 1.0.9
+* Last updated: 27 June 2011
 *
 * Changes
 *
+* 1.0.9:
+* added input argument to servicestatus method which allows single service
+*  filtering
+* 
 * 1.0.8:
 * correct unpark bug as reported by Randall Kent
 *
@@ -76,9 +80,9 @@
 * Changed submission from GET to POST
 *
 *
-* @copyright 2009 cPanel, Inc
+* @copyright 2011 cPanel, Inc
 * @license http://sdk.cpanel.net/license/bsd.html
-* @version 1.0.6
+* @version 1.0.9
 * @link http://twiki.cpanel.net/twiki/bin/view/AllDocumentation/AutomationIntegration/XmlApi
 * @since File available since release 0.1
 **/
@@ -104,9 +108,9 @@
 *
 * @category Cpanel
 * @package xmlapi
-* @copyright 2009 cPanel, Inc.
+* @copyright 2011 cPanel, Inc.
 * @license http://sdk.cpanel.net/license/bsd.html
-* @version Release: 1.0.6
+* @version Release: 1.0.9
 * @link http://twiki.cpanel.net/twiki/bin/view/AllDocumentation/AutomationIntegration/XmlApi
 * @since Class available since release 0.1
 **/
@@ -1974,12 +1978,19 @@ class xmlapi {
 	* Service Status
 	*
 	* This function will return the status of all services on the and whether they are running or not
+	* @param string $service A single service to filter for.
 	* @return mixed
 	* @link http://docs.cpanel.net/twiki/bin/view/AllDocumentation/AutomationIntegration/ServiceStatus XML API Call documentation
 	*/
-	public function servicestatus() {
-		return $this->xmlapi_query('servicestatus');
-	}
+    public function servicestatus($args=array())
+     {
+        if(!empty($args) && !is_array($args)){
+            $args = array('service'=>$args);
+        } elseif (!is_array($args)) {
+            $args = array();
+        }
+        return $this->xmlapi_query('servicestatus', $args);
+     }
 
 	/**
 	* Configure A Service
