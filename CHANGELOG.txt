@@ -1,5 +1,8 @@
 CHANGELOG.txt for xmlapi.php
 
+ 1.0.11:
+ - [Feature]: Remove value requirement for park()'s 'topdomain' argument
+ 
  1.0.10:
  - github#1 - [Bugfix]: setresellerpackagelimits() does not properly prepare 
     input arguments for query (Case 51076)

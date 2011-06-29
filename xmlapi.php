@@ -29,10 +29,14 @@
 * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 * POSSIBILITY OF SUCH DAMAGE.
 *
-* Version: 1.0.10
-* Last updated: 27 June 2011
+* Version: 1.0.11
+* Last updated: 29 June 2011
 *
 * Changes
+* 
+* 1.0.11:
+* [Feature]: Remove value requirement for park()'s 'topdomain' argument 
+*  (Case 51116)
 * 
 * 1.0.10:
 * github#1 - [Bugfix]: setresellerpackagelimits() does not properly prepare 
@@ -86,7 +90,7 @@
 *
 * @copyright 2011 cPanel, Inc
 * @license http://sdk.cpanel.net/license/bsd.html
-* @version 1.0.10
+* @version 1.0.11
 * @link http://twiki.cpanel.net/twiki/bin/view/AllDocumentation/AutomationIntegration/XmlApi
 * @since File available since release 0.1
 **/
@@ -114,7 +118,7 @@
 * @package xmlapi
 * @copyright 2011 cPanel, Inc.
 * @license http://sdk.cpanel.net/license/bsd.html
-* @version Release: 1.0.10
+* @version Release: 1.0.11
 * @link http://twiki.cpanel.net/twiki/bin/view/AllDocumentation/AutomationIntegration/XmlApi
 * @since Class available since release 0.1
 **/
@@ -2119,12 +2123,14 @@ class xmlapi {
 	// This API function displays a list of all parked domains for a specific user.
 	public function park($username, $newdomain, $topdomain) {
 		$args = array();
-		if ( (!isset($username)) && (!isset($newdomain)) && (!isset($topdomain)) ) {
-			error_log("park requires that a username, new domain and topdomain are passed to it");
+		if ( (!isset($username)) && (!isset($newdomain)) ) {
+			error_log("park requires that a username and new domain are passed to it");
 			return false;
 		}
 		$args['domain'] = $newdomain;
-		$args['topdomain'] = $topdomain;
+		if ($topdomain) {
+		    $args['topdomain'] = $topdomain;   
+		}
 		return $this->api2_query($username, 'Park', 'park', $args);
 	}
 
