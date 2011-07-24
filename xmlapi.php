@@ -29,11 +29,14 @@
 * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 * POSSIBILITY OF SUCH DAMAGE.
 *
-* Version: 1.0.11
-* Last updated: 29 June 2011
+* Version: 1.0.12
+* Last updated: 23 July 2011
 *
 * Changes
 * 
+* 1.0.12:
+* github#2 - [Bugfix]: typo related to environment variable XMLAPI_USE_SSL
+*
 * 1.0.11:
 * [Feature]: Remove value requirement for park()'s 'topdomain' argument 
 *  (Case 51116)
@@ -235,7 +238,7 @@ class xmlapi {
 		
 
 		// disabling SSL is probably a bad idea.. just saying.		
-		if ( defined('XMLAPI_USER_SSL' ) && (XMLAPI_USE_SSL == '0' ) ) {
+		if ( defined('XMLAPI_USE_SSL' ) && (XMLAPI_USE_SSL == '0' ) ) {
 			$this->protocol = "http";
 		}
 		

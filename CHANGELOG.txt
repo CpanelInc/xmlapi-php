@@ -1,5 +1,8 @@
 CHANGELOG.txt for xmlapi.php
 
+1.0.12:
+ - github#2 - [Bugfix]: typo related to environment variable XMLAPI_USE_SSL
+
  1.0.11:
  - [Feature]: Remove value requirement for park()'s 'topdomain' argument
  
