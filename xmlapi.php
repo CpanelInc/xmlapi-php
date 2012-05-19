@@ -2,9 +2,9 @@
 /**
 * cPanel XMLAPI Client Class
 *
-* This class allows for easy interaction with cPanel's XML-API allow functions within the XML-API to be called 
+* This class allows for easy interaction with cPanel's XML-API allow functions within the XML-API to be called
 * by calling funcions within this class
-*  
+*
 * LICENSE:
 *
 * Copyright (c) 2011, cPanel, Inc.
@@ -33,27 +33,27 @@
 * Last updated: 23 July 2011
 *
 * Changes
-* 
+*
 * 1.0.12:
 * github#2 - [Bugfix]: typo related to environment variable XMLAPI_USE_SSL
 *
 * 1.0.11:
-* [Feature]: Remove value requirement for park()'s 'topdomain' argument 
+* [Feature]: Remove value requirement for park()'s 'topdomain' argument
 *  (Case 51116)
-* 
+*
 * 1.0.10:
-* github#1 - [Bugfix]: setresellerpackagelimits() does not properly prepare 
+* github#1 - [Bugfix]: setresellerpackagelimits() does not properly prepare
 *  input arguments for query (Case 51076)
 *
 * 1.0.9:
 * added input argument to servicestatus method which allows single service
 *  filtering (Case 50804)
-* 
+*
 * 1.0.8:
 * correct unpark bug as reported by Randall Kent
 *
 * 1.0.7:
-* Corrected typo for setrellerlimits where xml_query incorrectly called xml-api's setresellerips 
+* Corrected typo for setrellerlimits where xml_query incorrectly called xml-api's setresellerips
 *
 * 1.0.6:
 * Changed 'user' URL parameter for API1/2 calls to 'cpanel_xmlapi_user'/'cpanel_jsonapi_user' to resolve conflicts with API2 functions that use 'user' as a parameter
@@ -70,7 +70,7 @@
 *
 * 1.0.3:
 * Fixed issue with set_auth_type using incorrect logic for determining acceptable auth types
-* Suppress non-UTF8 encoding when using curl 
+* Suppress non-UTF8 encoding when using curl
 *
 * 1.0.2:
 * Increased curl buffer size to 128kb from 16kb
@@ -101,7 +101,7 @@
 /**
 * The base XML-API class
 *
-* The XML-API class allows for easy execution of cPanel XML-API calls.  The goal of this project is to create 
+* The XML-API class allows for easy execution of cPanel XML-API calls.  The goal of this project is to create
 * an open source library that can be used for multiple types of applications.  This class relies on PHP5 compiled
 * with both curl and simplexml support.
 *
@@ -113,7 +113,7 @@
 * 2.) Setting access credentials within the class via either set_password or set_hash:
 * $xmlapi->set_hash("username", $accessHash);
 * $xmlapi->set_password("username", "password");
-* 
+*
 * 3.) Execute a function
 * $xmlapi->listaccts();
 *
@@ -129,7 +129,7 @@
 class xmlapi {
 	// should debugging statements be printed?
 	private $debug			= false;
-	
+
 	// The host to connect to
 	private $host				=	'127.0.0.1';
 
@@ -147,14 +147,14 @@ class xmlapi {
 
 	//  the actual password or hash
 	private $auth 			= null;
-	
+
 	// username to authenticate as
 	private $user				= null;
-	
+
 	// The HTTP Client to use
-	
+
 	private $http_client		= 'curl';
-	
+
 	/**
 	* Instantiate the XML-API Object
 	* All parameters to this function are optional and can be set via the accessor functions or constants
@@ -166,7 +166,7 @@ class xmlapi {
 	* @return Xml_Api object
 	*/
 	public function __construct($host = null, $user = null, $password = null ) {
-		
+
 		// Check if debugging must be enabled
 		if ( (defined('XMLAPI_DEBUG')) && (XMLAPI_DEBUG == '1') ) {
 		 	$this->debug = true;
@@ -176,15 +176,15 @@ class xmlapi {
 		if ( (defined('XMLAPI_RAW_XML')) && (XMLAPI_RAW_XML == '1') ) {
 		 	$this->raw_xml = true;
 		}
-		
+
 		/**
 		* Authentication
 		* This can either be passed at this point or by using the set_hash or set_password functions
 		**/
-		
+
 		if ( ( defined('XMLAPI_USER') ) && ( strlen(XMLAPI_USER) > 0 ) ) {
 			$this->user = XMLAPI_USER;
-	
+
 			// set the authtype to pass and place the password in $this->pass
 			if ( ( defined('XMLAPI_PASS') ) && ( strlen(XMLAPI_PASS) > 0 ) ) {
 				$this->auth_type = 'pass';
@@ -196,35 +196,35 @@ class xmlapi {
 				$this->auth_type = 'hash';
 				$this->auth = preg_replace("/(\n|\r|\s)/", '', XMLAPI_HASH);
 			}
-			
+
 			// Throw warning if XMLAPI_HASH and XMLAPI_PASS are defined
-			if ( ( ( defined('XMLAPI_HASH') ) && ( strlen(XMLAPI_HASH) > 0 ) ) 
+			if ( ( ( defined('XMLAPI_HASH') ) && ( strlen(XMLAPI_HASH) > 0 ) )
 				&& ( ( defined('XMLAPI_PASS') ) && ( strlen(XMLAPI_PASS) > 0 ) ) ) {
 				error_log('warning: both XMLAPI_HASH and XMLAPI_PASS are defined, defaulting to XMLAPI_HASH');
 			}
-			
-			
+
+
 			// Throw a warning if XMLAPI_HASH and XMLAPI_PASS are undefined and XMLAPI_USER is defined
 			if ( !(defined('XMLAPI_HASH') ) || !defined('XMLAPI_PASS') ) {
 				error_log('warning: XMLAPI_USER set but neither XMLAPI_HASH or XMLAPI_PASS have not been defined');
 			}
-			
+
 		}
-		
+
 		if ( ( $user != null ) && ( strlen( $user ) < 9 ) ) {
 			$this->user = $user;
 		}
-		
+
 		if ($password != null ) {
 			$this->set_password($password);
 		}
-		
+
 		/**
 		* Connection
-		* 
+		*
 		* $host/XMLAPI_HOST should always be equal to either the IP of the server or it's hostname
 		*/
-		
+
 		// Set the host, error if not defined
 		if ( $host == null ) {
 			if ( (defined('XMLAPI_HOST')) && (strlen(XMLAPI_HOST) > 0) ) {
@@ -2160,7 +2160,8 @@ class xmlapi {
 			error_log("getdiskusage requires that a username and args are passed to it");
 			return false;
 		}
-		if (is_array($args) && (!isset($args['domain']) || !isset($args['login']))) {
+		if (is_array($args) && (!isset($args['domain']) || !isset($args['lo
+in']))) {
 			error_log("getdiskusage requires that args at least contains an email_domain and email_username");
 			return false;
 		}
@@ -2177,13 +2178,29 @@ class xmlapi {
 	}
 
 	// This API2 function allows you to list ftp-users associated with a cPanel account.
-	public function listftp($username) {
-		if (!isset($username)) {
-			error_log("listftp requires that user is passed to it");
-			return false;
-		}
-		return $this->api2_query($username, 'Ftp', 'listftp');
-	}
+  public function createftpaccount($username, $ftp_username, $ftp_password, $ftp_quota = 10, $ftp_homedir = '') {
+  		if (!isset($username)) {
+  			error_log("addftp requires that user is passed to it");
+  			return false;
+  		}
+      if(empty($ftp_username)){
+        error_log("addftp requires that ftp_username is passed to it");
+        return false;
+      }
+      if (!isset($ftp_password)) {
+        error_log("addftp requires that ftp_password is passed to it");
+        return false;
+  		}
+
+      $args = array(
+        'user'  =>  $ftp_username,
+        'pass'  =>  $ftp_password,
+        'quota' => !empty($ftp_quota) ? $ftp_quota : 10,
+        'homedir' => !empty($ftp_homedir) ? $ftp_homedir : $ftp_username
+      );
+
+  		return $this->api2_query($username, 'Ftp', 'addftp', $args);
+  	}
 
 	// This API function displays a list of all parked domains for a specific user.
 	public function listparkeddomains($username, $domain = null) {
