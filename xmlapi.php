@@ -931,15 +931,16 @@ class xmlapi {
 	*
 	* @param string $username The username to change the password of
 	* @param string $pass The new password for the cPanel Account
+	* @param bool $db_pass_update Change the MySQL password - pass 0 to not change MySQL password
 	* @return mixed
 	* @link http://docs.cpanel.net/twiki/bin/view/AllDocumentation/AutomationIntegration/ChangePassword XML API Call documentation
 	*/
-	public function passwd($username, $pass){
+	public function passwd($username, $pass, $db_pass_update=1){
 		if (!isset($username) || !isset($pass)) {
 			error_log("passwd requires that an username and password are passed to it");
 			return false;
 		}
-		return $this->xmlapi_query('passwd', array('user' => $username, 'pass' => $pass));
+		return $this->xmlapi_query('passwd', array('user' => $username, 'pass' => $pass, 'db_pass_update' => $db_pass_update));
 	}
 
 	/**
