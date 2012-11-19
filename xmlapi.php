@@ -7,7 +7,7 @@
 *
 * LICENSE:
 *
-* Copyright (c) 2011, cPanel, Inc.
+* Copyright (c) 2012, cPanel, Inc.
 * All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without modification, are permitted provided
@@ -29,10 +29,13 @@
 * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 * POSSIBILITY OF SUCH DAMAGE.
 *
-* Version: 1.0.12
-* Last updated: 23 July 2011
+* Version: 1.0.13
+* Last updated: 19 November 2012
 *
 * Changes
+*
+* 1.0.13:
+* Tidy
 *
 * 1.0.12:
 * github#2 - [Bugfix]: typo related to environment variable XMLAPI_USE_SSL
@@ -91,9 +94,9 @@
 * Changed submission from GET to POST
 *
 *
-* @copyright 2011 cPanel, Inc
+* @copyright 2012 cPanel, Inc
 * @license http://sdk.cpanel.net/license/bsd.html
-* @version 1.0.11
+* @version 1.0.13
 * @link http://twiki.cpanel.net/twiki/bin/view/AllDocumentation/AutomationIntegration/XmlApi
 * @since File available since release 0.1
 **/
@@ -119,9 +122,9 @@
 *
 * @category Cpanel
 * @package xmlapi
-* @copyright 2011 cPanel, Inc.
+* @copyright 2012 cPanel, Inc.
 * @license http://sdk.cpanel.net/license/bsd.html
-* @version Release: 1.0.11
+* @version Release: 1.0.13
 * @link http://twiki.cpanel.net/twiki/bin/view/AllDocumentation/AutomationIntegration/XmlApi
 * @since Class available since release 0.1
 **/
