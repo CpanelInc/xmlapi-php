@@ -656,7 +656,7 @@ class xmlapi
 
         // Set the $auth string
 
-        $authstr;
+        $authstr = NULL;
         if ($this->auth_type == 'hash') {
             $authstr = 'Authorization: WHM ' . $this->user . ':' . $this->auth . "\r\n";
         } elseif ($this->auth_type == 'pass') {
@@ -671,7 +671,7 @@ class xmlapi
 
         // Perform the query (or pass the info to the functions that actually do perform the query)
 
-        $response;
+        $response = NULL;
         if ($this->http_client == 'curl') {
             $response = $this->curl_query($url, $args, $authstr);
         } elseif ($this->http_client == 'fopen') {
@@ -1543,7 +1543,7 @@ class xmlapi
     */
     public function editpkg($pkg)
     {
-        if (!$isset($pkg['name'])) {
+        if (!isset($pkg['name'])) {
             error_log("editpkg requires that name is defined in the array passed to it");
 
             return false;
