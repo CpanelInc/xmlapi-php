@@ -1543,7 +1543,7 @@ class xmlapi
     */
     public function editpkg($pkg)
     {
-        if (!$isset($pkg['name'])) {
+        if (!isset($pkg['name'])) {
             error_log("editpkg requires that name is defined in the array passed to it");
 
             return false;
