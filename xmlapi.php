@@ -2332,7 +2332,7 @@ class xmlapi
         return $this->api1_query($username, 'Email', 'addpop', $args);
     }
 
-    // This API function displays a list of all parked domains for a specific user.
+    // This API function parks a domain onto this user's account
     public function park($username, $newdomain, $topdomain)
     {
         $args = array();
@@ -2349,7 +2349,7 @@ class xmlapi
         return $this->api2_query($username, 'Park', 'park', $args);
     }
 
-    // This API function displays a list of all parked domains for a specific user.
+    // This API function unparks a domain from this user's account.
     public function unpark($username, $domain)
     {
         $args = array();
