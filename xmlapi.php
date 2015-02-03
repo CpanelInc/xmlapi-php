@@ -1278,6 +1278,15 @@ class xmlapi
         }
     }
 
+    /**
+     * @param $username
+     * @return mixed
+     */
+    public function getmaindomain($username)
+    {
+        return $this->api1_query($username, 'print','', array('$CPDATA{\'DOMAIN\'}'));
+    }
+
     ####
     # DNS Functions
     ####
@@ -2465,6 +2474,51 @@ class xmlapi
         }
 
         return $this->api2_query($username, 'StatsBar', 'stat', $values);
+    }
+
+    // This API function add as addon a domain onto this user's account
+    public function addaddon($username, $newdomain, $subdomain, $ftpPass, $dir = null)
+    {
+        if ( (!isset($username)) && (!isset($newdomain)) ) {
+            error_log("addaddon requires that a username, new domain, subdomain and ftp password are passed to it");
+
+            return false;
+        }
+
+        if(empty($dir)) {
+            $dir = "public_html/" . $newdomain;
+        }
+
+        $args = array(
+            'newdomain' => $newdomain,
+            'dir' => $dir,
+            'subdomain' => $subdomain,
+            'pass' => $ftpPass
+        );
+
+        return $this->api2_query($username, "AddonDomain", "addaddondomain", $args);
+    }
+
+    // This API function remove an addon domain from this user's account
+    public function deladdon($username, $newdomain, $subdomain, $maindomain = null)
+    {
+        if ( (!isset($username)) && (!isset($newdomain)) ) {
+            error_log("deladdon requires that a username, new domain and subdomain are passed to it");
+
+            return false;
+        }
+
+        if(!$maindomain) {
+            $maindomain = $this->getmaindomain($username);
+        }
+
+        // follow the pattern for subdomain: subdomain_maindomain.com
+        $args = array(
+            'newdomain' => $newdomain,
+            'subdomain' => $subdomain . '_' . $maindomain
+        );
+
+        return $this->api2_query($username, "AddonDomain", "deladdondomain", $args);
     }
 
 }
