@@ -2446,6 +2446,7 @@ class xmlapi
         return $this->api2_query($username, 'Park', 'listaddondomains');
     }
 
+    // This API function displays a list of all domains related to this account.
     public function listalldomains($username)
     {
         return $this->api2_query($username, 'DomainInfo', 'list_domains');
