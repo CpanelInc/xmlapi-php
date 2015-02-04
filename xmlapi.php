@@ -1278,15 +1278,6 @@ class xmlapi
         }
     }
 
-    /**
-     * @param $username
-     * @return mixed
-     */
-    public function getmaindomain($username)
-    {
-        return $this->api1_query($username, 'print','', array('$CPDATA{\'DOMAIN\'}'));
-    }
-
     ####
     # DNS Functions
     ####
@@ -2455,6 +2446,11 @@ class xmlapi
         return $this->api2_query($username, 'Park', 'listaddondomains');
     }
 
+    public function listalldomains($username)
+    {
+        return $this->api2_query($username, 'DomainInfo', 'list_domains');
+    }
+
     // This API function displays a list of all selected stats for a specific user.
     public function stat($username, $args = null)
     {
@@ -2509,7 +2505,8 @@ class xmlapi
         }
 
         if(!$maindomain) {
-            $maindomain = $this->getmaindomain($username);
+            $alldomains = $this->listalldomains($username);
+            $maindomain = $alldomains['main_domain'];
         }
 
         // follow the pattern for subdomain: subdomain_maindomain.com
