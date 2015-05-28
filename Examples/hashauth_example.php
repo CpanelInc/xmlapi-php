@@ -22,13 +22,10 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 include '../xmlapi.php';
-
-$ip = getenv('REMOTE_HOST');
-
 # The access has can be found on your server under WHM's "Setup remote access hash" section or at /root/.accesshash
 $root_hash = '__ROOT_HASH_GOES_HERE__';
 
-$xmlapi = new xmlapi($ip);
+$xmlapi = new xmlapi(SERVER_IP);
 $xmlapi->hash_auth("root",$root_hash);
 $xmlapi->return_xml(1);
 $xmlapi->set_debug(1);

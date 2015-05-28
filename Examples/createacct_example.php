@@ -22,13 +22,10 @@
 # POSSIBILITY OF SUCH DAMAGE.
 include_once '../xmlapi.php';
 
-$ip = getenv('REMOTE_HOST');
-$root_pass = getenv('REMOTE_PASSWORD');
-
-$xmlapi = new xmlapi($ip);
-$xmlapi->password_auth("root",$root_pass);
+$xmlapi = new xmlapi(SERVER_IP);
+$xmlapi->password_auth(ROOT_USER,ROOT_PASSWORD);
 
 $xmlapi->set_debug(1);
 
-$acct = array( username => "someuser", password => "pass123", domain => "thisdomain.com");
+$acct = array( username => "someuser", password => "pass123", domain => "thisdomain.com", plan =>"user_plan_diamond", contactemail=>"user@gmail.com",language=>"es");
 print $xmlapi->createacct($acct);

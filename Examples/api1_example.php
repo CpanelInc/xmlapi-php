@@ -23,17 +23,14 @@
 
 include '../xmlapi.php';
 
-$ip = getenv('REMOTE_HOST');
-$root_pass = getenv('REMOTE_PASSWORD');
-
 $account = "cptest";
 $email_user = "somerandomuser";
 $email_password = "adfm90f1m3f0m0adf";
 $email_domain = "somedomain.com";
 $email_query = '10';
 
-$xmlapi = new xmlapi($ip);
-$xmlapi->password_auth("root",$root_pass);
+$xmlapi = new xmlapi(SERVER_IP);
+$xmlapi->password_auth(ROOT_USER,ROOT_PASSWORD);
 $xmlapi->set_output('json');
 
 $xmlapi->set_debug(1);
