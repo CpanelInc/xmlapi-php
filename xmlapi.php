@@ -2329,7 +2329,7 @@ class xmlapi
             return false;
         }
 
-        return $this->api1_query($username, 'Email', 'addpop', $args);
+        return $this->api2_query($username, 'Email', 'addpop', $args);
     }
 
     // This API function parks a domain onto this user's account
