@@ -30,7 +30,7 @@ $account = "cptest";
 $email_user = "somerandomuser";
 $email_password = "adfm90f1m3f0m0adf";
 $email_domain = "somedomain.com";
-$email_query = '10';
+$email_quota = '10';
 
 $xmlapi = new xmlapi($ip);
 $xmlapi->password_auth("root",$root_pass);
