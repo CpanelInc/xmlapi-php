@@ -10,10 +10,5 @@
     {
       "name": "cPanel, Inc"
     }
-  ],
-  "autoload": {
-    "psr-4": {
-      "cpanelink\\xmlapi-php\\": "."
-    }
-  }
+  ]
 }
