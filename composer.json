@@ -1,0 +1,17 @@
+{
+  "name": "CpanelInc/xmlapi-php",
+  "description": "cPanel XMLAPI Client Class",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "require": {
+    "php": ">=5.2.0"
+  },
+  "authors": [
+    {
+      "name": "cPanel, Inc"
+    }
+  ],
+  "autoload": {
+    "psr-0": { "xmlapi": "" }
+  }
+}
