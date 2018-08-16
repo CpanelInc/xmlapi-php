@@ -4,12 +4,11 @@
 	
 	 	{
          		"repositories": [
-            
-                    {
-                        "type": "github",
-                        "url":  "https://github.com/CpanelInc/xmlapi-php.git"
-                    }
-                ],
+			    {
+				"type": "github",
+				"url":  "https://github.com/CpanelInc/xmlapi-php.git"
+			    }
+			],
         	}
         	
  1.  Setup package
