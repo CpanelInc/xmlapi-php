@@ -1,5 +1,5 @@
 {
-  "name": "pavel-krulov/xmlapi-php",
+  "name": "CpanelInc/xmlapi-php",
   "description": "cPanel XMLAPI Client Class",
   "minimum-stability": "stable",
   "license": "proprietary",
@@ -13,7 +13,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Pk13\\xmlapi-php\\": "."
+      "cpanelink\\xmlapi-php\\": "."
     }
   }
 }
