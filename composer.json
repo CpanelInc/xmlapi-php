@@ -4,11 +4,11 @@
   "minimum-stability": "stable",
   "license": "proprietary",
   "require": {
-    "php": ">=5.2.0",
+    "php": ">=5.2.0"
   },
   "authors": [
     {
-      "name": "cPanel, Inc",
+      "name": "cPanel, Inc"
     }
   ],
   "autoload": {
