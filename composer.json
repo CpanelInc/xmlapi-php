@@ -10,5 +10,8 @@
     {
       "name": "cPanel, Inc"
     }
-  ]
+  ],
+  "autoload": {
+    "psr-0": { "xmlapi": "" }
+  }
 }
