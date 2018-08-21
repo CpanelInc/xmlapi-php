@@ -450,7 +450,7 @@ class xmlapi
     public function set_auth_type( $auth_type )
     {
         if ($auth_type != 'hash' && $auth_type != 'pass') {
-            throw new Exception('the only two allowable auth types arehash and path');
+            throw new Exception('The only two allowable auth types are hash and pass');
         }
         $this->auth_type = $auth_type;
     }
