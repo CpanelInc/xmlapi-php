@@ -23,11 +23,8 @@
 
 include '../xmlapi.php';
 
-$ip = getenv('REMOTE_HOST');
-$root_pass = getenv('REMOTE_PASSWORD');
-
-$xmlapi = new xmlapi($ip);
-$xmlapi->password_auth("root",$root_pass);
+$xmlapi = new xmlapi(SERVER_IP);
+$xmlapi->password_auth(ROOT_USER,ROOT_PASSWORD);
 
 $xmlapi->set_debug(1);
 
