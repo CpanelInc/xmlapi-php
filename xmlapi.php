@@ -734,11 +734,16 @@ class xmlapi
     private function curl_query( $url, $postdata, $authstr )
     {
         $curl = curl_init();
+        // SECURITY: the next two options disable TLS certificate validation
+        // entirely, so that the self-signed certificates commonly found on
+        // cPanel & WHM servers are accepted.  This means a network attacker can
+        // intercept the connection and read the credential sent in the
+        // Authorization header.  This package is obsolete and this behavior
+        // will not be changed; see the security warning in README.adoc.
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-        // Return contents of transfer on curl_exec
-         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        // Allow self-signed certs
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+        // Return contents of transfer on curl_exec
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         // Set the URL
         curl_setopt($curl, CURLOPT_URL, $url);
         // Increase buffer size to avoid "funny output" exception

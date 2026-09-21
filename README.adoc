@@ -1,5 +1,46 @@
 = cPanel API PHP Class
 
+== Security warning: TLS certificates are not verified
+
+WARNING: When using the curl transport, this package does not verify TLS
+certificates.  It must not be used over untrusted networks.
+
+`curl_query()` hardcodes `CURLOPT_SSL_VERIFYPEER` to `0` and
+`CURLOPT_SSL_VERIFYHOST` to `0`, which disables TLS certificate validation
+entirely.  This was done so that the self-signed certificates commonly found on
+cPanel & WHM servers would be accepted.  Since curl is used whenever it is
+available, this is the transport nearly all consumers get.
+
+The `fopen_query()` fallback transport attempts the same thing by setting
+`allow_self_signed`, but places it in the `http` stream context wrapper rather
+than `ssl`, where it is silently ignored.  That transport therefore does verify
+certificates, and will reject the self-signed certificate on a typical
+cPanel & WHM server.
+
+The consequence is that an attacker positioned on the network between you and
+the server can present any certificate, transparently intercept the connection,
+and read the WHM access hash or password that this package sends in the
+`Authorization` header on every request.  That credential grants full control of
+the hosting environment.
+
+Separately, this package will silently downgrade to unencrypted HTTP, which
+exposes the same credential to passive observation with no interception
+required.  `set_port()` switches the protocol to `http` for ports `2082`,
+`2086`, `2095`, and `80`, and defining `XMLAPI_USE_SSL` as `0` does the same
+regardless of port.  Under password authentication the credential is then sent
+as `Authorization: Basic` over cleartext.
+
+Because this package is obsolete and no longer updated, this behavior will not
+be changed here.  If you must continue using it, use it only over a network path
+you fully control -- for example from the server itself, or over a VPN or other
+already-authenticated tunnel to the server.  Treat any access hash or password
+that has been sent through this package over an untrusted network as
+compromised, and revoke it.
+
+For new work, use a maintained client and enable TLS certificate verification.
+
+== About this package
+
 This is an obsolete package for interacting with the cPanel & WHM API.  It is no
 longer updated.
 
